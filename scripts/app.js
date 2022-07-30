@@ -44,8 +44,27 @@ class Player{
 
 }
 
+// Platform Class 
+
+class Platform{
+   constructor(){
+    this.position ={
+        x: 0,
+        y: 0,
+    }
+    this.width = 200;
+    this.height = 200;
+   } 
+
+   draw(){
+    context.fillStyle = 'blue';
+    context.fillRect(this.position.x, this.position.y, this.width, this.height)
+
+   }
+}
 
 const player = new Player();
+const platform = new Platform();
 // player.draw()
 
 const keys = {
@@ -61,6 +80,16 @@ function animate(){
     requestAnimationFrame(animate);
     context.clearRect(0,0, canvas.width, canvas.height)
     player.update();
+    platform.draw();
+
+    if(keys.right.pressed){
+
+        player.velocity.x = 5; 
+    }else if(keys.left.pressed){
+        player.velocity.x = -5;
+    }else{
+        player.velocity.x = 0; 
+    }
 }
 
 animate();
@@ -68,7 +97,6 @@ animate();
 // EVENT LISTNERS 
 
 addEventListener('keydown',({keyCode}) =>{
-    console.log(keyCode)
   switch (keyCode) {
     case 65:
       console.log("left");
@@ -90,7 +118,6 @@ addEventListener('keydown',({keyCode}) =>{
 })
 
 addEventListener("keyup", ({ keyCode }) => {
-  console.log(keyCode);
   switch (keyCode) {
     case 65:
       console.log("left");
@@ -108,7 +135,7 @@ addEventListener("keyup", ({ keyCode }) => {
       console.log("up");
       break;
   }
-  console.log(keys.right.pressed)
+  console.log(keys.left.pressed)
 });
 
 
