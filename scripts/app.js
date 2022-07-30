@@ -32,6 +32,7 @@ class Player{
     update(){
         // alter player properties 
         this.draw();
+        this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
         if(this.position.y +this.height + this.velocity.y <= canvas.height){
     this.velocity.y += gravity
@@ -41,11 +42,20 @@ class Player{
         }
     }
 
-    }
+}
 
 
 const player = new Player();
-player.draw()
+// player.draw()
+
+const keys = {
+right: {
+    pressed: false
+},
+left:{ 
+    pressed: false
+}
+}
 
 function animate(){
     requestAnimationFrame(animate);
@@ -54,3 +64,51 @@ function animate(){
 }
 
 animate();
+
+// EVENT LISTNERS 
+
+addEventListener('keydown',({keyCode}) =>{
+    console.log(keyCode)
+  switch (keyCode) {
+    case 65:
+      console.log("left");
+      keys.left.pressed = true;
+      break;
+    case 83:
+      console.log("down");
+      break;
+    case 68:
+      console.log("right");
+      keys.right.pressed = true
+      break;
+    case 87:
+        player.velocity.y -= 20
+      console.log("up");
+      break;
+  }
+  console.log(keys.right.pressed);
+})
+
+addEventListener("keyup", ({ keyCode }) => {
+  console.log(keyCode);
+  switch (keyCode) {
+    case 65:
+      console.log("left");
+      keys.left.pressed = false;
+      break;
+    case 83:
+      console.log("down");
+      break;
+    case 68:
+      console.log("right");
+      keys.right.pressed = false;
+      break;
+    case 87:
+      player.velocity.y -= 20;
+      console.log("up");
+      break;
+  }
+  console.log(keys.right.pressed)
+});
+
+
