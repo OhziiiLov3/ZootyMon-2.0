@@ -17,7 +17,7 @@ class Player{
             y: 100,
         }
         this.velocity ={ // pushes player and down 
-            x: 0,
+            x: 1,
             y: 0, 
         }
         this.width = 50;
@@ -34,7 +34,7 @@ class Player{
         this.draw();
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
-        if(this.position.y +this.height + this.velocity.y <= canvas.height){
+        if(this.position.y + this.height + this.velocity.y <= canvas.height){
     this.velocity.y += gravity
         this.velocity.y += gravity;
         }else{
@@ -49,11 +49,11 @@ class Player{
 class Platform{
    constructor(){
     this.position ={
-        x: 0,
-        y: 0,
+        x: 300,
+        y: 300,
     }
     this.width = 200;
-    this.height = 200;
+    this.height = 50;
    } 
 
    draw(){
@@ -89,6 +89,13 @@ function animate(){
         player.velocity.x = -5;
     }else{
         player.velocity.x = 0; 
+    }
+
+// Platform collison detection 
+    if(
+        player.position.y + player.height <= platform.position.y && player.position.y + player.height + player.velocity.y >= platform.position.y && player.position.x + player.width >= platform.position.x && player.position.x <= platform.position.x + platform.width){
+
+        player.velocity.y = 0
     }
 }
 
